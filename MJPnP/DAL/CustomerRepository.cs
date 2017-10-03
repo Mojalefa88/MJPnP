@@ -1,4 +1,5 @@
-﻿using MJPnP.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using MJPnP.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,12 @@ namespace MJPnP.DAL
 {
     public class CustomerRepository : IRepository<int, Customer>
     {
+        private PnPDbContext db;
         IList<Customer> _customer;
 
-        public CustomerRepository()
+        public CustomerRepository(PnPDbContext db)
         {
+            this.db = db;
             _customer = new List<Customer>
             {
                 new Customer{FirstName = "Jonas", LastName="Malatji",IdNumber="0002025683088",DateOfBirth="00/02/02", Gender="Male" }
@@ -37,7 +40,7 @@ namespace MJPnP.DAL
 
         public IEnumerable<Customer> GetAllCustomers()
         {
-            return _customer;
+            return db.Customers.ToList();
         }
 
         public void UpdateCustomer(Customer cus)
@@ -48,4 +51,6 @@ namespace MJPnP.DAL
             
         }
     }
+
+    
 }
