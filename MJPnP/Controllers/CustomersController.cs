@@ -10,6 +10,7 @@ using MJPnP.DAL;
 
 namespace MJPnP.Controllers
 {
+
     [Route("api/[controller]")]
     public class CustomersController : Controller
     {
@@ -23,20 +24,29 @@ namespace MJPnP.Controllers
         [HttpGet]
         public IEnumerable<Customer> Get()
         {
-            return _repository.GetAllCustomers();
+            return _repository.GetAll();
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Customer Get(int id)
         {
-            return "value";
+            return _repository.Get(id);
         }
 
+        [HttpGet("{username}/{password}")]
+        public string Get(string username, string password)
+        {
+            var login = _repository.Login(username, password);
+
+
+            return login;
+        }
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Customer customer)
         {
+            _repository.Create(customer);
         }
 
         // PUT api/values/5

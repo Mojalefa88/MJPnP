@@ -13,6 +13,8 @@ namespace MJPnP.Models
         private string idNumber;
         private string dateOfBirth;
         private string gender;
+        private string email;
+        private string password;
 
         public int CustomerID { get => customerID; set => customerID = value; }
         public string FirstName { get => firstName; set => firstName = value; }
@@ -20,5 +22,7 @@ namespace MJPnP.Models
         public string IdNumber { get => idNumber; set => idNumber = value; }
         public string DateOfBirth { get => dateOfBirth; set => dateOfBirth = value; }
         public string Gender { get => gender; set => gender = value; }
+        public string Email { get => email; set => email = value; }
+        public string Password { get => password; set => password = value; }
     }
 }

@@ -7,11 +7,15 @@ namespace MJPnPMVC.Models
 {
     public class Customer
     {
-        public int customerID;
-        public string firstName;
-        public string lastName;
-        public string idNumber;
-        public string dateOfBirth;
-        public string gender;
+        public int customerID{ get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string idNumber { get; set; }
+        public string dateOfBirth { get; set; }
+        public string gender { get; set; }
+        public string email { get; set; }
+        public string password { get; set; }
+
+
     }
 }

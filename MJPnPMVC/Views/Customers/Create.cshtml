@@ -1,0 +1,102 @@
+﻿@model MJPnPMVC.Models.Customer
+
+@{
+    ViewData["Title"] = "Create";
+}
+<style>
+    .regContainer {
+        background-color: #fd0728;
+    }
+    #regLabel {
+        margin-left: 300px;
+    }
+    input{
+        width: 100%;
+    }
+</style>
+
+<hr />
+<div>
+    <h4 id="regLabel" class="text-primary">Customer Registration Done Here</h4>
+</div>
+<div class="row regContainer">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <fieldset>
+                <legend class="text-primary">Personal Details</legend>
+                <div class="form-group">
+                    @*@Html.LabelFor(m => m.firstName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.firstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter FirstName" }  })
+                        @Html.ValidationMessageFor(m => m.firstName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="form-group">
+                    @*@Html.LabelFor(m => m.lastName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.lastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Last Name" } })
+                        @Html.ValidationMessageFor(m => m.lastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="form-group">
+                    @*@Html.LabelFor(m => m.idNumber, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.idNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter ID Number" } })
+                        @Html.ValidationMessageFor(m => m.idNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="form-group">
+                    @*@Html.LabelFor(m => m.dateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.dateOfBirth, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Date Of Birth" } })
+                        @Html.ValidationMessageFor(m => m.dateOfBirth, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="form-group">
+                    @*@Html.LabelFor(m => m.gender, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.gender, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Gender"} })
+                        @Html.ValidationMessageFor(m => m.gender, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="form-group">
+                    @*@Html.LabelFor(m => m.email, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                    <div class="col-md-10">
+                        @Html.EditorFor(m => m.email, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Email" } })
+                        @Html.ValidationMessageFor(m => m.email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </fieldset>
+          <br />
+            <div class="form-group">
+                <div class="col-md-offset-7 col-md-10">
+                    <input type="submit" value="Submit Details" class="btn btn-primary" />
+                </div>
+            </div>
+            
+            <br />
+            <br />
+            <p>.</p>
+        </form>
+    </div>
+    
+</div>
+<br />
+<div>
+    <a asp-action="Index">Back to Customer List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

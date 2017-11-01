@@ -23,27 +23,50 @@ namespace MJPnP.DAL
 
         public Customer Create(Customer customer)
         {
-            _customer.Add(customer);
+            //_customer.Add(customer);
+            db.Customers.Add(new Customer()
+            {
+                FirstName = customer.FirstName,
+                LastName = customer.LastName,
+                IdNumber = customer.IdNumber,
+                DateOfBirth = customer.DateOfBirth,
+                Gender = customer.Gender,
+                Email = customer.Email,
+                Password = "Password01"
+            });
+            db.SaveChanges();
+
 
             return customer;
         }
 
-        public void DeleteCustomer(int id)
+        public void Delete(int id)
         {
             _customer.RemoveAt(id);
         }
 
         public Customer Get(int id)
         {
-           return _customer.Where(c => c.CustomerID == id).FirstOrDefault();
+            var getCustomer = db.Customers.Where(c => c.CustomerID == id).FirstOrDefault();
+           return getCustomer;
         }
 
-        public IEnumerable<Customer> GetAllCustomers()
+        public IEnumerable<Customer> GetAll()
         {
             return db.Customers.ToList();
         }
 
-        public void UpdateCustomer(Customer cus)
+        public string Login(string userName, string password)
+        {
+            var isLogged = db.Customers.Where(l => l.Email == userName && l.Password == password).FirstOrDefault();
+
+            if (isLogged != null)
+                return string.Format(isLogged.FirstName + " " + isLogged.LastName);
+            else
+                return "Failed to login";
+        }
+
+        public void Update(Customer cus)
         {
             Customer customer = Get(cus.CustomerID);
             customer.FirstName = cus.FirstName;
