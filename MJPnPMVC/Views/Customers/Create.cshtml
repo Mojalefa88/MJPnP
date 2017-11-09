@@ -3,98 +3,188 @@
 @{
     ViewData["Title"] = "Create";
 }
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        //$("input").prop('disabled', true);
+        $("#gender").prop('disabled', true);
+        $("#dateOfBirth").prop('disabled', true);
+   
+        function isValidSAID(id) {
+            var i, c,
+                even = '',
+                sum = 0,
+                check = id.slice(-1);
+
+            if (id.length != 13 || id.match(/\D/)) {
+                return false;
+            }
+            id = id.substr(0, id.length - 1);
+            for (i = 0; c = id.charAt(i); i += 2) {
+                sum += +c;
+                even += id.charAt(i + 1);
+            }
+            even = '' + even * 2;
+            for (i = 0; c = even.charAt(i); i++) {
+                sum += +c;
+            }
+            sum = 10 - ('' + sum).charAt(1);
+            return ('' + sum).slice(-1) == check;
+        }
+        $("#idNumber").blur(function ()
+        {
+            var id = $("#idNumber").val();
+            if (isValidSAID(id))
+            {
+                var year = "", month = "", day = "", dob = "";
+                var gender = 0;
+
+                year = id.substring(0, 2);
+                month = id.substring(2, 4);
+                day = id.substring(4, 6);
+                gender = Number(id.substring(6, 7));
+                dob = year + "/" + month + "/" + day;
+
+                $("#dateOfBirth").val(dob);
+                if (gender > 4)
+                    $("#gender").val("Male")
+                else
+                    $("#gender").val("Female")
+
+                $("#gender").prop('disabled', false);
+                $("#dateOfBirth").prop('disabled', false);
+            }
+            else
+            {
+                $("#idNumberErrorMessage").text('Your ID is not valid- Please enter a valid South African ID');
+                $("#gender").val("");
+                $("#dateOfBirth").val("");
+                $("#idNumber").val("");
+            }
+         
+        });
+    });
+  </script>
 <style>
+
     .regContainer {
-        background-color: #fd0728;
+        background-color: #C0C0C0;
+        /*background: linear-gradient(to bottom, #0000ff 0%, #6666ff 100%);*/
+        /*background: rgba(0,0,0,0.13);*/
+        box-shadow: 5px 5px;
+        border-radius: 5px;
+        /*color: #fff;*/
+        color: #830606;
     }
     #regLabel {
         margin-left: 300px;
+        color: #ffffff;
+        font-weight: bold;
     }
     input{
         width: 100%;
     }
+    .topLabelDiv {
+        border-radius: 5px;
+        background: linear-gradient(to bottom, #0000ff 0%, #6666ff 100%);
+        height: 50px;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-shadow: 5px 5px;
+       color: #830606;
+    }
+    legend {
+        color: #ffffff;
+        font-weight: bold;
+    }
 </style>
-
-<hr />
-<div>
+<br />
+<div class="topLabelDiv">
     <h4 id="regLabel" class="text-primary">Customer Registration Done Here</h4>
 </div>
-<div class="row regContainer">
-    <div class="col-md-6">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <fieldset>
-                <legend class="text-primary">Personal Details</legend>
-                <div class="form-group">
-                    @*@Html.LabelFor(m => m.firstName, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        @Html.EditorFor(m => m.firstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter FirstName" }  })
-                        @Html.ValidationMessageFor(m => m.firstName, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <br />
-                <br />
-                <div class="form-group">
-                    @*@Html.LabelFor(m => m.lastName, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        @Html.EditorFor(m => m.lastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Last Name" } })
-                        @Html.ValidationMessageFor(m => m.lastName, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <br />
-                <br />
-                <div class="form-group">
-                    @*@Html.LabelFor(m => m.idNumber, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        @Html.EditorFor(m => m.idNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter ID Number" } })
-                        @Html.ValidationMessageFor(m => m.idNumber, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <br />
-                <br />
-                <div class="form-group">
-                    @*@Html.LabelFor(m => m.dateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        @Html.EditorFor(m => m.dateOfBirth, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Date Of Birth" } })
-                        @Html.ValidationMessageFor(m => m.dateOfBirth, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <br />
-                <br />
-                <div class="form-group">
-                    @*@Html.LabelFor(m => m.gender, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        @Html.EditorFor(m => m.gender, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Gender"} })
-                        @Html.ValidationMessageFor(m => m.gender, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <br />
-                <br />
-                <div class="form-group">
-                    @*@Html.LabelFor(m => m.email, htmlAttributes: new { @class = "control-label col-md-2" })*@
-                    <div class="col-md-10">
-                        @Html.EditorFor(m => m.email, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Email" } })
-                        @Html.ValidationMessageFor(m => m.email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-            </fieldset>
-          <br />
-            <div class="form-group">
-                <div class="col-md-offset-7 col-md-10">
-                    <input type="submit" value="Submit Details" class="btn btn-primary" />
-                </div>
+<form asp-action="Create">
+    <div class="row regContainer">
+            <div class="col-sm-3 col-md-3 col-lg-3">
             </div>
-            
-            <br />
-            <br />
-            <p>.</p>
-        </form>
-    </div>
-    
-</div>
+            <div class="col-sm-6 col-md-6 col-lg-6">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <fieldset>
+                    <legend>Personal Details</legend>
+                    <div class="form-group">
+                        @*@Html.LabelFor(m => m.firstName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-10">
+                            @Html.EditorFor(m => m.firstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter FirstName" } })
+                            @Html.ValidationMessageFor(m => m.firstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        @*@Html.LabelFor(m => m.lastName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-10">
+                            @Html.EditorFor(m => m.lastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Last Name" } })
+                            @Html.ValidationMessageFor(m => m.lastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        @*@Html.LabelFor(m => m.idNumber, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-10">
+                            @Html.EditorFor(m => m.idNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter ID Number", ID = "idNumber" } })
+                            @Html.ValidationMessageFor(m => m.idNumber, "", new { @class = "text-danger", ID = "idNumberErrorMessage" })
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        @*@Html.LabelFor(m => m.dateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-10">
+                            @Html.EditorFor(m => m.dateOfBirth, new { htmlAttributes = new { @class = "form-control", placeholder = "Date Of Birth", ID = "dateOfBirth" } })
+                            @Html.ValidationMessageFor(m => m.dateOfBirth, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        @*@Html.LabelFor(m => m.gender, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-10">
+                            @Html.EditorFor(m => m.gender, new { htmlAttributes = new { @class = "form-control", placeholder = "Gender", ID = "gender" } })
+                            @Html.ValidationMessageFor(m => m.gender, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div class="form-group">
+                        @*@Html.LabelFor(m => m.email, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-10">
+                            @Html.EditorFor(m => m.email, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Email" } })
+                            @Html.ValidationMessageFor(m => m.email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </fieldset>
+                <br />
+                <div class="form-group">
+                    <div class="col-sm-10 col-md-10 col-lg-10">
+                        <input type="submit" value="Submit Details" class="btn btn-success" />
+                    </div>
+                </div>
+
+                <br />
+                <br />
+                <p>.</p>
+
+            </div>
+            <div class="col-sm-3 col-md-3 col-lg-3">
+            </div>
+        </div>
+</form>
+
 <br />
 <div>
-    <a asp-action="Index">Back to Customer List</a>
+    <a asp-action="Index" class="btn btn-primary">Back to Customer List</a>
 </div>
 
 @section Scripts {

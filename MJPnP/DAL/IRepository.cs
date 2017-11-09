@@ -11,7 +11,7 @@ namespace MJPnP.DAL
         Value Get(Key id);
         IEnumerable<Value> GetAll();
         void Update(Value value);
-        void Delete(Key id);
+        void Delete(Value value);
 
         string Login(string userName, string password);
     }

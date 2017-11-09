@@ -23,7 +23,6 @@ namespace MJPnP.DAL
 
         public Customer Create(Customer customer)
         {
-            //_customer.Add(customer);
             db.Customers.Add(new Customer()
             {
                 FirstName = customer.FirstName,
@@ -32,7 +31,8 @@ namespace MJPnP.DAL
                 DateOfBirth = customer.DateOfBirth,
                 Gender = customer.Gender,
                 Email = customer.Email,
-                Password = "Password01"
+                Password = "Password01",
+                Status = "Active"
             });
             db.SaveChanges();
 
@@ -40,9 +40,10 @@ namespace MJPnP.DAL
             return customer;
         }
 
-        public void Delete(int id)
+        public void Delete(Customer cus)
         {
-            _customer.RemoveAt(id);
+            Customer customer = Get(cus.CustomerID);
+            customer.Status = "Deleted";
         }
 
         public Customer Get(int id)

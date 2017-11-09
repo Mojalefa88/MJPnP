@@ -13,6 +13,7 @@ namespace MJPnP.Models
         private string description;
         private byte[] image;
         private int categoryID;
+        private string status;
 
         public int ProductId { get => productId; set => productId = value; }
         public string Name { get => name; set => name = value; }
@@ -20,7 +21,8 @@ namespace MJPnP.Models
         public string Description { get => description; set => description = value; }
         public byte[] Image { get => image; set => image = value; }
         public int CategoryID { get => categoryID; set => categoryID = value; }
-
+        public string Status { get => status; set => status = value; }
         public virtual ICollection<ProductCategory> ProductCategories { get; set; }
+        
     }
 }

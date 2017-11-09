@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using MJPnP.Models;
+using System.Linq;
 
 namespace MJPnP.DAL
 {
@@ -10,24 +11,37 @@ namespace MJPnP.DAL
         {
             this.db = db;
         }
-        public Product Create(Product newValue)
+        public Product Create(Product product)
         {
-            throw new System.NotImplementedException();
+            db.Products.Add(new Product()
+            {
+                Name = product.Name,
+                Price = product.Price,
+                Description = product.Description,
+                Image = product.Image,
+                CategoryID = product.CategoryID,
+
+            });
+
+            db.SaveChanges();
+
+            return product;
         }
 
-        public void Delete(int id)
+        public void Delete(Product prod)
         {
-            throw new System.NotImplementedException();
+            Product product = Get(prod.ProductId);
+            product.Status = "Deleted";
         }
 
         public Product Get(int id)
         {
-            throw new System.NotImplementedException();
+            return db.Products.Where(p => p.ProductId == id).FirstOrDefault();
         }
 
         public IEnumerable<Product> GetAll()
         {
-            throw new System.NotImplementedException();
+            return db.Products.ToList();
         }
 
         public string Login(string userName, string password)
@@ -35,9 +49,14 @@ namespace MJPnP.DAL
             throw new System.NotImplementedException();
         }
 
-        public void Update(Product value)
+        public void Update(Product prod)
         {
-            throw new System.NotImplementedException();
+            Product product = Get(prod.ProductId);
+            product.Name = prod.Name;
+            prod.Price = prod.Price;
+            product.Description = prod.Description;
+            product.Image = prod.Image;
+            product.CategoryID = prod.CategoryID;
         }
     }
 }

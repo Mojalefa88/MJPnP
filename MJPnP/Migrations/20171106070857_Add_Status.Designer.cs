@@ -11,9 +11,10 @@ using System;
 namespace MJPnP.Migrations
 {
     [DbContext(typeof(PnPDbContext))]
-    partial class PnPDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171106070857_Add_Status")]
+    partial class Add_Status
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

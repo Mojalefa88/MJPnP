@@ -101,13 +101,14 @@ namespace MJPnPMVC.Controllers
                         ViewBag.loginError = "Either your username/passord is incorrect";
                     }
                         
-                }
-
-                
+                } 
             }
+            return View();
+        }
 
-            
-
+        [HttpPost]
+        public IActionResult Delete(int id)
+        {
             return View();
         }
     }
