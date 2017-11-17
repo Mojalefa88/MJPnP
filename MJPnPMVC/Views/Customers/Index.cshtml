@@ -33,7 +33,7 @@
             <td>@item.gender</td>
             <td>@item.email</td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new {  id= item.customerID }) |
+                @Html.ActionLink("Edit", "Update", new {  id= item.customerID }) |
                 @Html.ActionLink("Details", "Details", new { id= item.customerID }) |
                 @Html.ActionLink("Delete", "Delete", new { id=item.customerID })
             </td>

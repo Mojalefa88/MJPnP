@@ -50,15 +50,17 @@ namespace MJPnP.Controllers
         }
 
         // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPut]
+        public void Put([FromBody]Customer customer)
         {
+            _repository.Update(customer);
         }
 
         // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        [HttpDelete]
+        public void Delete([FromBody]Customer customer)
         {
+            _repository.Delete(customer);
         }
     }
 }

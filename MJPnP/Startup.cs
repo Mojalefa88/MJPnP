@@ -33,7 +33,9 @@ namespace MJPnP
             });
           
             services.AddTransient<IRepository<int, Customer>, CustomerRepository>();
-            services.AddTransient<IRepository<int, Product>, ProductRepository>();
+            services.AddTransient<IProductRepository<int, Product>, ProductRepository>();
+
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +47,7 @@ namespace MJPnP
             }
 
             app.UseMvc();
+            app.UseSession();
         }
     }
 }

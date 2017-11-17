@@ -26,5 +26,7 @@ namespace MJPnP.Models
         public string Email { get => email; set => email = value; }
         public string Password { get => password; set => password = value; }
         public string Status { get => status; set => status = value; }
+
+        public virtual ICollection<SmartCard> SmartCards { get; set; }
     }
 }

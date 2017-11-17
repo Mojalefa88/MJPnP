@@ -1,0 +1,119 @@
+﻿@model MJPnPMVC.Models.Customer
+
+@{
+    ViewData["Title"] = "Update";
+}
+
+<style>
+ .regContainer {
+        background-color: #C0C0C0;
+        /*background: linear-gradient(to bottom, #0000ff 0%, #6666ff 100%);*/
+        /*background: rgba(0,0,0,0.13);*/
+        box-shadow: 5px 5px;
+        border-radius: 5px;
+        /*color: #fff;*/
+        color: #830606;
+    }
+    #regLabel {
+        margin-left: 300px;
+        color: #ffffff;
+        font-weight: bold;
+    }
+    input{
+        width: 100%;
+    }
+    .topLabelDiv {
+        border-radius: 5px;
+        background: linear-gradient(to bottom, #0000ff 0%, #6666ff 100%);
+        height: 50px;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-shadow: 5px 5px;
+       color: #830606;
+    }
+    legend {
+        color: #ffffff;
+        font-weight: bold;
+    }
+</style>
+<br />
+
+        <div class="topLabelDiv">
+            <h4 id="regLabel" class="text-primary">Update</h4>
+        </div>
+        <form asp-action="Update">
+            <div class="row regContainer">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                </div>
+                <div class="col-sm-6 col-md-6 col-lg-6">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <fieldset>
+                        <legend>Personal Details</legend>
+                        @*@Html.HiddenFor(model => model.productID)*@
+                        <input asp-for="customerID" class="form-control" hidden="hidden" />
+                        @*<div class="form-group">
+                            <label asp-for="customerID" class="control-label"></label>
+                            <input asp-for="customerID" class="form-control" />
+                            <span asp-validation-for="customerID" class="text-danger"></span>
+                        </div>*@
+                        <div class="form-group">
+                            @*<label asp-for="firstName" class="control-label"></label>*@
+                            <input asp-for="firstName" class="form-control" />
+                            <span asp-validation-for="firstName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            @*<label asp-for="lastName" class="control-label"></label>*@
+                            <input asp-for="lastName" class="form-control" />
+                            <span asp-validation-for="lastName" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            @*<label asp-for="idNumber" class="control-label"></label>*@
+                            <input asp-for="idNumber" class="form-control" contenteditable="false"/>
+                            <span asp-validation-for="idNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            @*<label asp-for="dateOfBirth" class="control-label"></label>*@
+                            <input asp-for="dateOfBirth" class="form-control" contenteditable="false"/>
+                            <span asp-validation-for="dateOfBirth" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            @*<label asp-for="gender" class="control-label"></label>*@
+                            <input asp-for="gender" class="form-control" contenteditable="false"/>
+                            <span asp-validation-for="gender" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            @*<label asp-for="email" class="control-label"></label>*@
+                            <input asp-for="email" class="form-control" />
+                            <span asp-validation-for="email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            @*<label asp-for="password" class="control-label"></label>*@
+                            <input asp-for="password" class="form-control" />
+                            <span asp-validation-for="password" class="text-danger"></span>
+                        </div>
+                        @*<div class="form-group">
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        </div>*@
+                    </fieldset>
+                    <br />
+                    <div class="form-group">
+                        <div class="col-sm-10 col-md-10 col-lg-10">
+                            <input type="submit" value="Update Details" class="btn btn-success" />
+                        </div>
+                    </div>
+
+                    <br />
+                    <br />
+                    <p>.</p>
+
+                </div>
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                </div>
+            </div>
+        </form>
+   
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

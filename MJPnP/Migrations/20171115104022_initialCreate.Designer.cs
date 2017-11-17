@@ -11,8 +11,8 @@ using System;
 namespace MJPnP.Migrations
 {
     [DbContext(typeof(PnPDbContext))]
-    [Migration("20171101093925_MoreTables")]
-    partial class MoreTables
+    [Migration("20171115104022_initialCreate")]
+    partial class initialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,6 +62,8 @@ namespace MJPnP.Migrations
 
                     b.Property<string>("Password");
 
+                    b.Property<string>("Status");
+
                     b.HasKey("CustomerID");
 
                     b.ToTable("Customers");
@@ -98,6 +100,8 @@ namespace MJPnP.Migrations
 
                     b.Property<double>("Price");
 
+                    b.Property<string>("Status");
+
                     b.HasKey("ProductId");
 
                     b.ToTable("Products");
@@ -121,14 +125,18 @@ namespace MJPnP.Migrations
 
             modelBuilder.Entity("MJPnP.Models.SmartCard", b =>
                 {
-                    b.Property<int>("SmartCardId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("CustomerId");
 
                     b.Property<string>("Point");
 
-                    b.HasKey("SmartCardId");
+                    b.Property<string>("SmartCardId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("SmartCards");
                 });
@@ -138,6 +146,14 @@ namespace MJPnP.Migrations
                     b.HasOne("MJPnP.Models.Product")
                         .WithMany("ProductCategories")
                         .HasForeignKey("ProductId");
+                });
+
+            modelBuilder.Entity("MJPnP.Models.SmartCard", b =>
+                {
+                    b.HasOne("MJPnP.Models.Customer")
+                        .WithMany("SmartCards")
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

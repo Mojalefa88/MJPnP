@@ -8,6 +8,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.Text;
+using Microsoft.AspNetCore.Http;
 
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -16,6 +17,7 @@ namespace MJPnPMVC.Controllers
 {
     public class CustomersController : Controller
     {
+        const string SessionKeyName = "_Name";
         // GET: /<controller>/
         public IActionResult Index()
         {
@@ -93,7 +95,7 @@ namespace MJPnPMVC.Controllers
 
                     if (readTask != "Failed to login")
                     {
-                        
+                        HttpContext.Session.SetString("Name", customer.lastName);
                         return RedirectToAction("Index");
                     }
                     else
@@ -105,11 +107,90 @@ namespace MJPnPMVC.Controllers
             }
             return View();
         }
+        [HttpGet]
+        public IActionResult Update(int id)
+        {
+            var customer = new Customer();
 
+           // List<Customer> customer = new List<Customer>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:53856/api/");
+
+                var responseTask = client.GetAsync("customers/" + id);
+                responseTask.Wait();
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync().Result;
+                    customer = JsonConvert.DeserializeObject<Customer>(readTask);
+                }
+            }
+            //Customer cus = customer.Where(c => c.customerID == id).FirstOrDefault();
+
+            return View(customer);
+            
+        }
         [HttpPost]
+        public IActionResult Update(Customer customer)
+        {
+            using(var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:53856/api/customers");
+
+                var putTask = client.PutAsJsonAsync<Customer>("customers", customer);
+                putTask.Wait();
+
+                var result = putTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(customer);
+        }
+
+        [HttpGet]
         public IActionResult Delete(int id)
         {
-            return View();
+            var customer = new Customer();
+
+            // List<Customer> customer = new List<Customer>();
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:53856/api/");
+
+                var responseTask = client.GetAsync("customers/" + id);
+                responseTask.Wait();
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsStringAsync().Result;
+                    customer = JsonConvert.DeserializeObject<Customer>(readTask);
+                }
+            }
+            //Customer cus = customer.Where(c => c.customerID == id).FirstOrDefault();
+
+            return View(customer);
+        }
+
+        [HttpDelete]
+        public IActionResult Delete(Customer customer)
+        {
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:53856/api/customers");
+
+                var putTask = client.PutAsJsonAsync<Customer>("customers", customer);
+                putTask.Wait();
+
+                var result = putTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+            return View(customer);
         }
     }
 }

@@ -36,6 +36,9 @@ namespace MJPnP.DAL
             });
             db.SaveChanges();
 
+            var customerID = db.Customers.LastOrDefault().CustomerID;
+
+            CreateSmartCard(customerID);
 
             return customer;
         }
@@ -44,6 +47,7 @@ namespace MJPnP.DAL
         {
             Customer customer = Get(cus.CustomerID);
             customer.Status = "Deleted";
+            db.SaveChanges();
         }
 
         public Customer Get(int id)
@@ -67,12 +71,43 @@ namespace MJPnP.DAL
                 return "Failed to login";
         }
 
-        public void Update(Customer cus)
+        public void Update(Customer customer)
         {
-            Customer customer = Get(cus.CustomerID);
-            customer.FirstName = cus.FirstName;
-            customer.LastName = cus.LastName;
+            int customerID = customer.CustomerID;
+            var existingCustomer = Get(customerID);
+            existingCustomer.FirstName = customer.FirstName;
+            existingCustomer.LastName = customer.LastName;
+            existingCustomer.Email = customer.Email;
+            existingCustomer.Gender = customer.Gender;
+            existingCustomer.DateOfBirth = customer.DateOfBirth;
+            //db.Entry(existingCustomer).State = EntityState.Modified;
+            db.SaveChanges();
+           
+        }
+
+        public void CreateSmartCard(int customerID)
+        {
+            var date = DateTime.Now;
+            //var month = date.Month;
+            //var year = date.Year;
+            //var day = date.Day;
+            //var hour = date.Hour;
+            //var minute = date.Minute;
+            //var second = date.Second;
+
+            //var tempSmartId = day + "" + month + "" + year + "" + hour + "" + minute + "" + second;
+
+           var tempSmartId = date.ToString("yyMMddHHmmss");
+
+            db.SmartCards.Add(new SmartCard
+            {
+                SmartCardId = tempSmartId,
+                Point = "0",
+                CustomerId = customerID,
+            });
+
             
+            db.SaveChanges();
         }
     }
 

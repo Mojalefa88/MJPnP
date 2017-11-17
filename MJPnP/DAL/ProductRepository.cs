@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using MJPnP.Models;
 using System.Linq;
+using System;
 
 namespace MJPnP.DAL
 {
-    public class ProductRepository : IRepository<int, Product>
+    public class ProductRepository : IProductRepository<int, Product>
     {
         private PnPDbContext db;
         public ProductRepository(PnPDbContext db)
@@ -39,14 +40,25 @@ namespace MJPnP.DAL
             return db.Products.Where(p => p.ProductId == id).FirstOrDefault();
         }
 
+        public Product Get(string value)
+        {
+            Product product = new Product();
+            if ((!string.IsNullOrEmpty(value)) && (isNumeric(value, System.Globalization.NumberStyles.Float)))
+            {
+                var price = 0.0;
+                bool convert = double.TryParse(value, out price);
+
+                product = db.Products.Where(p => p.Price.Equals(price)).FirstOrDefault();
+            }
+                return db.Products.Where(p => p.Name.Contains(value)
+                                    ||p.Name.StartsWith(value)).FirstOrDefault();
+
+           
+        }
+
         public IEnumerable<Product> GetAll()
         {
             return db.Products.ToList();
-        }
-
-        public string Login(string userName, string password)
-        {
-            throw new System.NotImplementedException();
         }
 
         public void Update(Product prod)
@@ -57,6 +69,13 @@ namespace MJPnP.DAL
             product.Description = prod.Description;
             product.Image = prod.Image;
             product.CategoryID = prod.CategoryID;
+        }
+
+        public bool isNumeric(string val, System.Globalization.NumberStyles NumberStyle)
+        {
+            Double result;
+            return Double.TryParse(val, NumberStyle,
+                System.Globalization.CultureInfo.CurrentCulture, out result);
         }
     }
 }

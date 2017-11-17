@@ -1,0 +1,117 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>RegisterSmartShopper</title>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" />
+    <style>
+        
+        .SmartContent {
+            margin-top: 100px;
+            margin-left: 5%;
+            width: 100%;
+            padding: 10px;
+            height: 400px;
+            text-align: center;
+        }
+
+        .checkButtons {
+            padding-left: 60px;
+        }
+
+        .onlineShoppingLink {
+            background-color: rgb(167, 2, 64);
+            margin: 5px;
+            padding: 0px;
+            color: #ffffff;
+        }
+
+        .onlineLink {
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+            .onlineLink:hover {
+                color: #ffffff;
+                font-weight: bold;
+            }
+
+        .glyphicon-arrow-left {
+            color: #ffffff;
+        }
+        .pickOne {
+            width:11em;
+            word-wrap: break-word;
+        }
+        .labels{
+            font-weight: bold;
+        }
+        .buttonNext {
+            background-color: rgb(51, 102, 204);
+            width: 233px;
+            height: 40px;
+            font-weight: bold;
+           margin-right: 100px;
+            color: #ffffff;
+            text-align: center;
+        }
+        .buttonNext:hover{
+            color: #ffffff;
+        }  
+        .divNext{
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">MJPnPMVC</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav pull-right">
+                    <li class="onlineShoppingLink"><a asp-area="" asp-controller="Home" asp-action="#" class="onlineLink" style="color:#ffffff;"><span class="glyphicon glyphicon-arrow-left"></span> GO TO THE ONLINE SHOP</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="SmartContent">
+            <h1 class="labels">Please enter your details below</h1>
+            <br />
+            <h4 class="labels">Sign up in seconds to start shopping online, and get groceries and more delivered to your door.</h4>
+
+            <div class="form-inline  checkButtons">
+                <label>Smart Shopper card number</label>
+                <div class="form-group">
+                    <input  class="form-control" />
+                    <span  class="text-danger"></span>
+                </div>
+                <span class="pickOne">You'll find this on the back of your card. Don't have a card? Pick one up in store.</span>
+            </div>
+            
+            <div class="divNext">
+                <a asp-area="" asp-controller="Customers" asp-action="Create" class="btn buttonNext">NEXT</a>
+            </div>
+           
+            
+        </div>
+    </div>
+</body>
+</html>

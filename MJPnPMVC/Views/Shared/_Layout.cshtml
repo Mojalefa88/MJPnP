@@ -40,9 +40,16 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
                 </ul>
+                <ul class="nav navbar-nav pull-right">
+                    <li><a asp-area="" asp-controller="Home" asp-action="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li><a asp-area="" asp-controller="Home" asp-action="SmartShopperCheck"><span class="glyphicon glyphicon-plus"></span> Register</a></li>
+                </ul>
             </div>
         </div>
     </nav>
+    @{ 
+        
+    }
     <div class="container body-content">
         @RenderBody()
         <hr />
