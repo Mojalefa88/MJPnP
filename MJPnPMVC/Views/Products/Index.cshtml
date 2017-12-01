@@ -80,33 +80,43 @@
 <div class="row imageRow">
     <div class="col-sm-8 col-md-8 col-lg-8 outerAllCols">
         <div class="row">
-            @foreach (var item in Model)
+            <form asp-action="Index" method="post">
+                @foreach (var item in Model)
             {
                 var base64 = Convert.ToBase64String(item.Image);
                 var prodImage = string.Format("data:image/png;base64,{0}", base64);
                 var rand = "R";
 
-                <div class="col-sm-4 col-md-4 col-lg-4 allCols">
-                    <div class="imageDiv">
-                        <a href="@Url.Action("ProductDetails","Products", new { id = item.ProductId})">
-                            <img src="@prodImage" alt="Product Image" class="productImage" />
-                        </a>
-                    </div>
-                    <div class="detailsDiv">
-                        <p>@item.Name @item.Description <a href="@Url.Action("ProductDetails","Products", new { id = item.ProductId})">Read More</a></p>
-                        @*<button class="minusButton"><span class="glyphicon glyphicon-minus"></span></button>*@
-                        <p class="price"> @rand @item.Price</p>
-                        <input id="quantity" type="number"  min="1" max="100" value="1"/>
-                        @*<button class="plusButton"><span class="glyphicon glyphicon-plus"></span></button> 
+                    <div class="col-sm-4 col-md-4 col-lg-4 allCols">
+                        <div class="imageDiv">
+                            <a href="@Url.Action("ProductDetails","Products", new { id = item.ProductId})">
+                                <img src="@prodImage" alt="Product Image" class="productImage" />
+                            </a>
+                        </div>
+                        <div class="detailsDiv">
+                            <p>@item.Name @item.Description <a href="@Url.Action("ProductDetails","Products", new { id = item.ProductId})">Read More</a></p>
+                            @*<button class="minusButton"><span class="glyphicon glyphicon-minus"></span></button>*@
+                            <p class="price"> @rand @item.Price</p>
+                            <input id="quantity" type="number" min="1" max="100" value="1" />
+                            @*<button class="plusButton"><span class="glyphicon glyphicon-plus"></span></button>
                         <p><b>@item.Price</b></p>*@
-                       <br />
-                        @*@Html.ActionLink("ADD TO TROLLEY", "getProductById", new { id = item.ProductId}, new { htmlAttributes = new { @class = "btn addToTrolley" } })*@
-                        <a href="#"  class="btn addToTrolley">ADD TO TROLLEY</a>
-                        <button type="submit" class="addToTrolley" value="ADD TO TROLLEY"/>
-                    </div>
-                </div>
+                            <br />
+                            @*@Html.ActionLink("ADD TO TROLLEY", "getProductById", new { id = item.ProductId}, new { htmlAttributes = new { @class = "btn addToTrolley" } })*@
+                            <a href="#" class="btn addToTrolley">ADD TO TROLLEY</a>
 
-            }
+                            <button type="submit" class="addToTrolley">ADD TO TROLLEY</button>
+                            <input type="hidden" asp-for="@item.ProductId" id="ProductId" name="ProductId"/>
+                            <input type="hidden" asp-for="@item.Name" id="Name" name="Name"/>
+                            <input type="hidden" asp-for="@item.Category" id="Category" name="Category" />
+                            <input type="hidden" asp-for="@item.Price" id="Price" name="Price"/>
+                            <input type="hidden" asp-for="@item.Quantity" id="Quantity" name="Quantity"/>
+                            <input type="hidden" asp-for="@item.Status" id="Status" name="Status"/>
+                            <input type="hidden" asp-for="@item.Image" id="Image" name="Image"/>
+                        </div>
+                    </div>
+
+                }
+            </form>
         </div>
       </div>
     <div class="col-sm-3 col-md-3 col-lg-3 outerRightCol">
