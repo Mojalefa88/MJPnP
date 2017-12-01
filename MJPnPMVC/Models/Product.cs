@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MJPnP.Models
+namespace MJPnPMVC.Models
 {
     public class Product
     {

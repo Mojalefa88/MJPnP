@@ -4,81 +4,220 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - MJPnPMVC</title>
-
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <environment include="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+       
+        @*<link rel="stylesheet" href="~/css/site.css" />*@
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        @*<link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />*@
     </environment>
     <style>
         body {
             /*background-image: url('/images/bg.jpg');*/
             /*background: linear-gradient(to bottom, #ff0000 0%, #3333cc 100%);*/
+
+        }
+        .firstTop {
+            background-color: #b9154a;
+            color: #ffffff;
+            font-weight: bold;
+           
+        }
+        
+        .listTop {
+            padding-right: 230px;
+           
+        }
+        .navbar-brand {
+            background-image: url('/images/logo.png');
+            width: 157px;
+            height: 100%;
+            margin-top: 8px;
+            margin-right: 10px;
+        }
+        .searchForm {
+            width: 50%;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .searchButton{
+            border-left: 0px;
+        }
+        .shoppingList {
+            margin: 5px;
+            padding: 0px;
+            color: #ffffff;
+            background-color: rgb(51, 102, 204);
+        }
+        .glyphicon-map-marker {
+            font-size: 30px;
+        }
+        .glyphicon-shopping-cart {
+            font-size: 30px;
+        }
+        .navigationBar {
+           
+            /*background: rgba(10,10,10,0.20);*/
+        }
+        /*#searchValue {
+            width: 200px;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            background-image: url('searchicon.png');
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px 40px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
+
+            #searchValue:focus {
+                width: 100%;
+            }*/
+        .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+        .dropdown-menu{
+            width:200px;
+        } 
+        .dropdown-menu li a {
+            color: black;
+            padding: 8px 10px;
+            text-decoration: none;
+            display: block;
+            font-weight: bold;
+        }
+        .dropdown-menu li a span{
+            margin-left: 10px;
+        }
+        dropdown>li>a {
+            color: red;
+            text-decoration: none;
+            display: block;
+            font-weight: bold;
+        }
+        .lastBottomNav {
+            background: rgba(255, 255, 255, 0.9);
+            margin-top: 95px;
+            border: none;
         }
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">MJPnPMVC</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
-                </ul>
-                <ul class="nav navbar-nav pull-right">
-                    <li><a asp-area="" asp-controller="Home" asp-action="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="SmartShopperCheck"><span class="glyphicon glyphicon-plus"></span> Register</a></li>
+        <nav class="navbar navbar-default navbar-fixed-top navigationBar">
+            <div class="navbar-collapse collapse firstTop">
+                <ul class="nav navbar-nav pull-right listTop">
+                    <li class="topList"><a style="color:#ffffff;" asp-area="" asp-controller="Home" asp-action="#">YOU ARE BROWSING:  GAUTENG <span>|</span></a></li>
+                    <li class="topList"><a style="color:#ffffff;" asp-area="" asp-controller="Home" asp-action="#"><span class="glyphicon glyphicon-log-in"></span> LOG IN</a></li>
+                    <li class="topList"><a style="color:#ffffff;" asp-area="" asp-controller="Home" asp-action="SmartShopperCheck"><span class="glyphicon glyphicon-plus"></span>  SIGN UP</a></li>
                 </ul>
             </div>
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="nav navbar-brand"></a>
+                   @*<form><input type="search" placeholder="I'm looking for" class="form-control searchBox" id="searchValue" name="searchValue" /></form>*@ 
+                </div>
+                
+                @*<input type="search" placeholder="I'm looking for" class="form-control searchBox" />*@
+                <div class="navbar-collapse collapse">
+                    <form class="searchForm">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="I'm looking for" id="searchValue" name="searchValue">
+                            <div class="input-group-btn">
+                                <button class="btn btn-default searchButton" type="submit">
+                                    <i class="glyphicon glyphicon-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <ul class="nav navbar-nav pull-right" style="top:42px; right:280px; position:absolute;">
+                        <li><a style="color:#ffffff; background-color: rgb(167, 2, 64);padding-top:7px; margin-right:10px; padding-bottom:7px; margin-top:10px;text-align:center" asp-area="" asp-controller="Home" asp-action="Home">
+                            <span class="glyphicon glyphicon-refresh"></span> REORDER</a></li>
+                        <li><a style="color:#ffffff; background-color: rgb(21, 58, 89);padding-top:7px; padding-bottom:7px; margin-top:10px;text-align:center" asp-area="" asp-controller="Home" asp-action="About" >
+                            <span class="glyphicon glyphicon-th-list"></span> SHOPPING LIST</a></li>
+                        <li><a style="padding-left: 5px;" asp-area="" asp-controller="Home" asp-action="Contact">
+                            <span class="glyphicon glyphicon-map-marker"></span></a></li>
+                        <li><a style="padding-left: 0px;" asp-area="" asp-controller="Home" asp-action="Contact">
+                                <sup style="width:100%; font-weight:bold; font-size:15px;z-index:2; top:-20px;right:-25px; background-color:rgb(167, 2, 64);color:#ffffff;  border-radius: 80%;">10</sup><span class="glyphicon glyphicon-shopping-cart"></span></a></li>
+                    </ul>
+                   
+                </div>
+                
+                </div>
+        </nav>
+        <nav class="navbar navbar-default navbar-fixed-top lastBottomNav">
+            <div class="container">
+                <ul class="nav navbar-nav ">
+                    <li class="dropdown">
+                        <a href="#" style="font-weight:bold;">SHOP</a>
+                        <ul class="dropdown-menu dropMenu">
+                            <li><a href="#">FRESH FOOD@*<span class="glyphicon glyphicon-chevron-right pull-right"></span>*@</a></li>
+                            <li><a href="#">FOOD CUPBOARD</a></li>
+                            <li><a href="#">FROZEN FOOD</a></li>
+                            <li><a href="#">CONVENIENCE MEALS</a></li>
+                            <li><a href="#">WINE & LIQUOR</a></li>
+                            <li><a href="#">BEVERAGES</a></li>
+                            <li><a href="#">HEALTH & BEAUTY</a></li>
+                            <li><a href="#">BABY</a></li>
+                            <li><a href="#">HOUSEHOLD CLEANING</a></li>
+                            <li><a href="#">ELECTRONICS & OFFICE</a></li>
+                            <li><a href="#">HOME & OUTDOOR</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#" style="font-weight:bold;">SPECIALS</a></li>
+                    <li><a href="#" style="font-weight:bold;">RECIPES</a></li>
+                    <li><a href="#" style="font-weight:bold;">IN-STORE CATALOGUES</a></li>
+                    <li><a href="#" style="font-weight:bold;">CHRISTMAS</a></li>
+                </ul>
+            </div>
+        </nav>
+        @{
+
+        }
+    
+        <div class="container body-content">
+            @RenderBody()
+            <hr />
+            <footer>
+                <p>&copy; 2017 - MJPnPMVC</p>
+            </footer>
         </div>
-    </nav>
-    @{ 
-        
-    }
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2017 - MJPnPMVC</p>
-        </footer>
-    </div>
 
-    <environment include="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
-    </environment>
-    <environment exclude="Development">
-        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
-                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                asp-fallback-test="window.jQuery"
-                crossorigin="anonymous"
-                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
-        </script>
-        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>
-        <script src="~/js/site.min.js" asp-append-version="true"></script>
-    </environment>
+        <environment include="Development">
+            <script src="~/lib/jquery/dist/jquery.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="~/js/site.js" asp-append-version="true"></script>
+        </environment>
+        <environment exclude="Development">
+            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                    asp-fallback-test="window.jQuery"
+                    crossorigin="anonymous"
+                    integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+            </script>
+            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                    crossorigin="anonymous"
+                    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+            </script>
+            <script src="~/js/site.min.js" asp-append-version="true"></script>
+        </environment>
 
-    @RenderSection("Scripts", required: false)
+        @RenderSection("Scripts", required: false)
 </body>
 </html>

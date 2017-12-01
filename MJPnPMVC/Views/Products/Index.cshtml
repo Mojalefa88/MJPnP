@@ -1,0 +1,114 @@
+﻿@model IEnumerable<MJPnPMVC.Models.ProductCategoryViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<style>
+    .imageDiv {
+        padding-left: 0px;
+        padding-right: 0px;
+        height: 200px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background-color: #ffffff;
+    }
+
+        .imageDiv img {
+            padding-left: 0px;
+            padding-right: 0px;
+            width: 100%;
+            height: 100%;
+        }
+    .allCols {
+        border: 1px solid rgb(51, 102, 204);
+        margin-top: 20px;
+        /*box-shadow: 5px 5px;*/
+        padding-bottom: 10px;
+    }
+    .outerRightCol {
+        border: 1px solid rgb(167, 2, 64);
+        height: 500px;
+        margin-left: 10px;
+        box-shadow: 5px;
+        margin-top: 20px;
+    }
+    #quantity{
+        width: 50px;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .minusButton, .plusButton {
+        background-color: #808080;
+        width: 50px;
+        height: 25px;
+        align-self: center;
+    }
+    .glyphicon-minus, .glyphicon-plus{
+        color: #ffffff;
+    }
+    .addToTrolley {
+        background-color: rgb(167, 2, 64);
+        width: 100%;
+        color: #ffffff;
+        font-weight: bold;
+    }
+    .price{
+        font-weight: bold;
+    }
+    .imageRow{
+        margin-top:130px;
+    }
+</style>
+@*<script>
+    $(document).ready(function () {
+        var quatity = 1;
+        $(".minusButton").click(function () {
+            quatity = quatity - 1;
+        });
+
+        $(".plusButton").click(function () {
+            
+            quatity = quatity + 1;
+            $("#quantity").val(quatity);
+        });
+
+       
+    });
+</script>*@
+<div class="row imageRow">
+    <div class="col-sm-8 col-md-8 col-lg-8 outerAllCols">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                var base64 = Convert.ToBase64String(item.Image);
+                var prodImage = string.Format("data:image/png;base64,{0}", base64);
+                var rand = "R";
+
+                <div class="col-sm-4 col-md-4 col-lg-4 allCols">
+                    <div class="imageDiv">
+                        <a href="@Url.Action("ProductDetails","Products", new { id = item.ProductId})">
+                            <img src="@prodImage" alt="Product Image" class="productImage" />
+                        </a>
+                    </div>
+                    <div class="detailsDiv">
+                        <p>@item.Name @item.Description <a href="@Url.Action("ProductDetails","Products", new { id = item.ProductId})">Read More</a></p>
+                        @*<button class="minusButton"><span class="glyphicon glyphicon-minus"></span></button>*@
+                        <p class="price"> @rand @item.Price</p>
+                        <input id="quantity" type="number"  min="1" max="100" value="1"/>
+                        @*<button class="plusButton"><span class="glyphicon glyphicon-plus"></span></button> 
+                        <p><b>@item.Price</b></p>*@
+                       <br />
+                        @*@Html.ActionLink("ADD TO TROLLEY", "getProductById", new { id = item.ProductId}, new { htmlAttributes = new { @class = "btn addToTrolley" } })*@
+                        <a href="#"  class="btn addToTrolley">ADD TO TROLLEY</a>
+                        <button type="submit" class="addToTrolley" value="ADD TO TROLLEY"/>
+                    </div>
+                </div>
+
+            }
+        </div>
+      </div>
+    <div class="col-sm-3 col-md-3 col-lg-3 outerRightCol">
+    </div>
+</div>

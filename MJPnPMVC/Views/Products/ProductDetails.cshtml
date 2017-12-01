@@ -1,0 +1,162 @@
+﻿@model MJPnPMVC.Models.Product
+@{
+    ViewData["Title"] = "ProdutDetails";
+}
+<style>
+    .imageBox {
+        border: 1px solid rgb(51, 102, 204);
+        height: 341px;
+        width: 341px;
+        margin: 10px;
+        padding: 10px;
+        
+    }
+
+    .imageBox img{
+        width: 100%;
+        height: 100%;
+    }
+    .productNameH3{
+        font-weight: bold;
+    }
+    .priceH4 {
+        color: #ff0000;
+        font-weight: bold;
+    }
+    #quantity {
+        width: 50px;
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .addToTrolley {
+        background-color: rgb(167, 2, 64);
+        width: 100%;
+        color: #ffffff;
+        font-weight: bold;
+    }
+    .glyphicon-chevron-down{
+        width: 30px;
+    }
+    .tabHead {
+        font-weight: bold;
+        border-top: 1px solid #cccccc;
+        border-left: 1px solid #cccccc;
+        border-right: 1px solid #cccccc;
+        margin-bottom: 0px;
+    }
+    .tab-content {
+        width: 750px;
+        border-bottom: 1px solid #cccccc;
+        border-left: 1px solid #cccccc;
+        border-right: 1px solid #cccccc;
+        border-top: 0.1px solid #cccccc;
+    }
+    .tabBox {
+        width: 750px;
+        
+    }
+   /* ratings start*/
+    .rating {
+        float: left;
+        border: none;
+    }
+
+        .rating:not(:checked) > input {
+            position: absolute;
+            top: -9999px;
+            clip: rect(0, 0, 0, 0);
+        }
+
+        .rating:not(:checked) > label {
+            float: right;
+            width: 1em;
+            padding: 0 .1em;
+            overflow: hidden;
+            white-space: nowrap;
+            cursor: pointer;
+            font-size: 200%;
+            line-height: 1.2;
+            color: #ddd;
+        }
+
+            .rating:not(:checked) > label:before {
+                content: '★ ';
+            }
+
+        .rating > input:checked ~ label {
+            color: #f70;
+        }
+
+        .rating:not(:checked) > label:hover {
+            color: gold;
+        }
+
+        .rating > input:checked + label:hover {
+            color: #ea0;
+        }
+
+        .rating > label:active {
+            position: relative;
+        }
+    .detailContainer {
+        margin-top: 135px;
+    }
+/*rating end*/
+</style>
+<div class="row detailContainer">
+    <div class="imageBox col-sm-4 col-md-4 col-lg-4">
+        @{
+            var base64 = Convert.ToBase64String(Model.Image);
+            var productImage = string.Format("data:image/png;base64,{0}", base64);
+
+            var productDesc = Model.Name + " " + Model.Description;
+            var price = "R " + Model.Price.ToString();
+        }
+        <img src="@Url.Content(@productImage)" class="productImage" />
+    </div>
+    <div class="detailBox col-sm-4 col-md-4 col-lg-4">
+        <h3 class="productNameH3">@productDesc</h3>
+   
+
+        <h4 class="priceH4">@price</h4>
+        <br />
+        <input id="quantity" type="number" min="1" max="100" value="1" />
+        <br />
+        <br />
+        <a href="#" class="btn addToTrolley">ADD TO TROLLEY</a>
+        <br />
+        <br />
+        <fieldset class="rating">
+            <input type="radio" id="star5" name="rating" value="5" />
+            <label for="star5"></label>
+            <input type="radio" id="star4" name="rating" value="4" />
+            <label for="star4"></label>
+            <input type="radio" id="star3" name="rating" value="3" />
+            <label for="star3"></label>
+            <input type="radio" id="star2" name="rating" value="2" />
+            <label for="star2"></label>
+            <input type="radio" id="star1" name="rating" value="1" />
+            <label for="star1"></label>
+        </fieldset>
+    </div>
+    
+</div>
+<div class="tabBox">
+    <ul class="nav nav-tabs">
+        <li class="active"><a class="tabHead" data-toggle="tab" href="#productInfo">PRODUCT INFORMATION <span class="glyphicon glyphicon-chevron-down" ></span></a></li>
+        <li><a class="tabHead" data-toggle="tab" href="#reviews">REVIEWS <span class="glyphicon glyphicon-chevron-down "></span></a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="productInfo" class="tab-pane fade in active">
+            <h3>Product info</h3>
+            <p>Some content in product info.</p>
+        </div>
+        <div id="reviews" class="tab-pane fade">
+            <h3>Review</h3>
+            <p>Some content in review.</p>
+        </div>
+    </div>
+</div>
+
+

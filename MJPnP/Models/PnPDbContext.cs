@@ -14,7 +14,7 @@ namespace MJPnP.Models
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<SmartCard> SmartCards { get; set; }
         public DbSet<Address> Addresses { get; set; }
-
+        public DbSet<Cart> Carts { get; set; }
         public PnPDbContext(DbContextOptions<PnPDbContext> dbContextOptions) : base(dbContextOptions)
         {
             

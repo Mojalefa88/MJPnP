@@ -34,6 +34,9 @@ namespace MJPnP
           
             services.AddTransient<IRepository<int, Customer>, CustomerRepository>();
             services.AddTransient<IProductRepository<int, Product>, ProductRepository>();
+            services.AddTransient<IProductCategoryRepository<int, ProductCategoryViewModel>, ProductRepository>();
+            services.AddTransient<ITrolleyRepository<int, Cart>, TrolleyService>();
+            services.AddTransient<ICartProductRepository<int, CartProductViewModel>, TrolleyService>();
 
             services.AddSession();
         }

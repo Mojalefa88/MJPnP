@@ -11,9 +11,10 @@ using System;
 namespace MJPnP.Migrations
 {
     [DbContext(typeof(PnPDbContext))]
-    partial class PnPDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171117065604_initialCreate")]
+    partial class initialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,22 +41,6 @@ namespace MJPnP.Migrations
                     b.HasKey("AddressId");
 
                     b.ToTable("Addresses");
-                });
-
-            modelBuilder.Entity("MJPnP.Models.Cart", b =>
-                {
-                    b.Property<int>("CartId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("CustomerId");
-
-                    b.Property<int>("ProductId");
-
-                    b.Property<int>("Quantity");
-
-                    b.HasKey("CartId");
-
-                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("MJPnP.Models.Customer", b =>
@@ -114,8 +99,6 @@ namespace MJPnP.Migrations
                     b.Property<string>("Name");
 
                     b.Property<double>("Price");
-
-                    b.Property<int>("Quantity");
 
                     b.Property<string>("Status");
 

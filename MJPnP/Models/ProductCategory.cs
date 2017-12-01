@@ -15,5 +15,7 @@ namespace MJPnP.Models
         [Key]
         public int CategoryId { get => categoryId; set => categoryId = value; }
         public string Category { get => category; set => category = value; }
+
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

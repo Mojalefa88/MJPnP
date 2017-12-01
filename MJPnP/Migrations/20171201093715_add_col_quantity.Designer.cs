@@ -11,8 +11,8 @@ using System;
 namespace MJPnP.Migrations
 {
     [DbContext(typeof(PnPDbContext))]
-    [Migration("20171115104022_initialCreate")]
-    partial class initialCreate
+    [Migration("20171201093715_add_col_quantity")]
+    partial class add_col_quantity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,22 @@ namespace MJPnP.Migrations
                     b.HasKey("AddressId");
 
                     b.ToTable("Addresses");
+                });
+
+            modelBuilder.Entity("MJPnP.Models.Cart", b =>
+                {
+                    b.Property<int>("CartId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CustomerId");
+
+                    b.Property<int>("ProductId");
+
+                    b.Property<int>("Quantity");
+
+                    b.HasKey("CartId");
+
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("MJPnP.Models.Customer", b =>
@@ -100,9 +116,13 @@ namespace MJPnP.Migrations
 
                     b.Property<double>("Price");
 
+                    b.Property<int>("Quantity");
+
                     b.Property<string>("Status");
 
                     b.HasKey("ProductId");
+
+                    b.HasIndex("CategoryID");
 
                     b.ToTable("Products");
                 });
@@ -114,11 +134,7 @@ namespace MJPnP.Migrations
 
                     b.Property<string>("Category");
 
-                    b.Property<int?>("ProductId");
-
                     b.HasKey("CategoryId");
-
-                    b.HasIndex("ProductId");
 
                     b.ToTable("ProductCategories");
                 });
@@ -141,11 +157,12 @@ namespace MJPnP.Migrations
                     b.ToTable("SmartCards");
                 });
 
-            modelBuilder.Entity("MJPnP.Models.ProductCategory", b =>
+            modelBuilder.Entity("MJPnP.Models.Product", b =>
                 {
-                    b.HasOne("MJPnP.Models.Product")
-                        .WithMany("ProductCategories")
-                        .HasForeignKey("ProductId");
+                    b.HasOne("MJPnP.Models.ProductCategory")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("MJPnP.Models.SmartCard", b =>

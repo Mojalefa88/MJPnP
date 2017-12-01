@@ -17,6 +17,7 @@ namespace MJPnPMVC.Controllers
 {
     public class CustomersController : Controller
     {
+       
         const string SessionKeyName = "_Name";
         // GET: /<controller>/
         public IActionResult Index()
@@ -96,6 +97,8 @@ namespace MJPnPMVC.Controllers
                     if (readTask != "Failed to login")
                     {
                         HttpContext.Session.SetString("Name", customer.lastName);
+
+                        var session = HttpContext.Session.GetString("Name");
                         return RedirectToAction("Index");
                     }
                     else
